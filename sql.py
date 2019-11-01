@@ -1,7 +1,8 @@
 import sqlite3
+import time
 
 
-def create_connection(db_file='C:\Users\Laszlo.Szoboszlai\personal\git\\flight\\flights.db'):
+def create_connection(db_file='flights.db'):
     try:
         conn = sqlite3.connect(db_file)
         return conn
@@ -27,10 +28,12 @@ def execute_sql_file(filename):
 
 if __name__ == '__main__':
     #execute_sql_file('create_flights_table.sql')
-    conn = sqlite3.connect('C:\Users\Laszlo.Szoboszlai\personal\git\\flight\\flights.db')
-    cur = conn.execute('SELECT * FROM flights')
-    i = 0
+    conn = sqlite3.connect('flights.db')
+    sq = 'select last_seen ,price  from flights where dTime ="1567203600" order by last_seen'
+    sql = 'SELECT price, last_seen, flight_no,dTime  FROM flights ORDER BY last_seen DESC'
+    sql2 = 'SELECT MIN(price), MAX(price),MAX(price)- MIN(price), dTime from flights GROUP BY dTime'
+
+    cur = conn.execute(sq)
     for c in cur:
-        print(i)
-        print(c)
-        i += 1
+        print(time.strftime('%m/%d-%A',  time.gmtime(int(c[0]))), c[1])
+

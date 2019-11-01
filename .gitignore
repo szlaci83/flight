@@ -1,3 +1,5 @@
-venv/
+.venv/
+app.log
 .idea
 *.db
+*.save

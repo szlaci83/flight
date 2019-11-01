@@ -9,7 +9,7 @@ TESTTO = '30/08/2019'
 ADAY = 60 * 60 * 24
 
 
-def create_connection(db_file='C:\Users\Laszlo.Szoboszlai\personal\git\\flight\\flights.db'):
+def create_connection(db_file='flights.db'):
     try:
         conn = sqlite3.connect(db_file)
         return conn
@@ -68,4 +68,5 @@ if __name__ == '__main__':
             print("Getting:" + str(route))
             flights = search_flight(*route)['data']
             save_flights(flights)
+        print('sleeping...')
         time.sleep(ADAY)
